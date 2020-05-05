@@ -10,9 +10,19 @@
   <div id="app">
     <h1>Vueチュートリアル</h1>
     <p>{{message}}</p>
+    <h2>v-for でlist内の文字列を繰り返し表示</h2>
     <ol>
       <li v-for="item in list">{{item}}</li>
     </ol>
+    <h2>v-on でイベントの利用</h2>
+    <button v-on:click="handleClick">Click!</button>
+    <br>
+    <h2>v-model でフォームの入力項目を関連付け</h2>
+    <input v-model="input_text">
+    <p>{{input_text}}</p>
+    <h2>v-if で条件分岐</h2>
+    <button v-on:click="switchShow">switchShow</button>
+    <p v-if="show">showがtrueなら表示！</p>
   </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
