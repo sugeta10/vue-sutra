@@ -1,0 +1,17 @@
+.v-enter-active, v-leave-active {
+  transition: opacity 1s;
+}
+/* opacity:0 から1へフェードアウト */
+.v-enter, v-leave-to {
+  opacity:0;
+}
+.child {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.item {
+  padding: 4px 8px;
+  transition: background-color 0.4s;
+}
+.is-active {
+  background: #ffeaea;
+}

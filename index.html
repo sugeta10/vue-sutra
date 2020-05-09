@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Vue.js App</title>
-  <link rel="stylesheet" href="./main.css">
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
@@ -23,6 +23,40 @@
     <h2>v-if で条件分岐</h2>
     <button v-on:click="switchShow">switchShow</button>
     <p v-if="show">showがtrueなら表示！</p>
+    <h2>transitionタグの利用とアニメーション</h2>
+    <button v-on:click="show_t=!show_t">切り替え</button>
+    <transition>
+      <p v-if="show_t">Hello</p>
+    </transition>
+  </div>
+  <hr>
+  <div id="app2">
+    <h1>データの更新</h1>
+    <h2>v-bind 修飾子の活用</h2>
+    <!-- DOMのtextContentプロパティにバインドする -->
+    <div v-bind:text-content.prop="message"></div>
+    <!-- DOMのscrolltopプロパティにバインドする -->
+    <div v-bind:scroll-ctop.prop="scroll"></div>
+    <h2>$data タグで現在のデータをJSONで表示できる</h2>
+    <p>※コンソールやVue DevToolsも併用したほうがよい</p>
+    <pre>{{$data}}</pre>
+    <h2>v-on を使ったカウンター</h2>
+    <p>{{count}}回クリックした！</p>
+    <button v-on:click="increment">countを増やす</button>
+    <h2>クラスとスタイルのデータバインディング</h2>
+    <p v-bind:class="{child: isChild, 'is-active': isActive}">{child: isChild, 'is-active': isActive}</p>
+    <p v-bind:style="{color: textColor, backgroundColor: bgColor}">{color: textColor, backgroundColor: bgColor}</p>
+    <p v-bind:class="classObject">classObject</p>
+    <p v-bind:style="styleObject">styleObject</p>
+    <h2>複数の属性のデータバインディング</h2>
+    <p>img v-bind="item"</p>
+    <img v-bind="item">
+    <h2>SVG のデータバインディング</h2>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+      <circle cx="100" cy="75" v-bind:r="radius" fill="lightpink" />
+    </svg>
+    <p>{{radius}}</p>>
+    <input type="range" min="0" max="100" v-model.number="radius">
   </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
