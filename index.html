@@ -126,8 +126,16 @@
   <p>HPが500以上のつよいMonsterのデータを消す</p>
   <button v-on:click="changeMonster()">実行</button>
   </div>
+  <h2>外部からデータを取得</h2>
+  <ul>
+    <li v-for="(item, index) in list" v-bind:key="item.id">
+      ID.{{ item.id }} {{ item.name }} HP.{{ item.hp }}
+    </li>
+  </ul>
+
 
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="./main.js"></script>
 </body>
 </html>

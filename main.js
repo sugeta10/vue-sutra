@@ -64,6 +64,7 @@ var app2 = new Vue ({
         color: 'red',
         backgroundColor: 'lightgray',
       },
+      list : [],
       monsterName: 'キマイラ',
       monsters: [
         {id: 1, name: 'スライム', hp: 100},
@@ -106,6 +107,12 @@ var app2 = new Vue ({
       }
     },
     created: function(){
+      axios.get('list.json').then(function (response) {
+        // 取得完了したらlistリストに代入
+        this.list = response.data
+      }.bind(this)).catch(function (e) {
+        console.error(e)
+      }),
       this.monsters.forEach(function(mon){
         this.$set(mon, 'active', false)
       }, this)
