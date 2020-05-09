@@ -132,6 +132,22 @@
       ID.{{ item.id }} {{ item.name }} HP.{{ item.hp }}
     </li>
   </ul>
+  <h2>DOMを直接参照する $el,$refs</h2>
+  <p>$el 以下のようにすることでルート要素を確認できる
+  <pre>// div id app2... /div をコンソールに出力
+  mounted: function() {
+    console.log(this.$el)
+  }</pre>
+  <p>$refs を付けるとメソッド内からDOMにアクセスできる</p>
+  <p ref="hello">Hello</p>
+  <pre>
+  mounted: function() {
+    console.log(this.$refs.hello)
+  }</pre>
+  <h2>テスト 動作確認中</h2>
+  <button v-on:click="countUp">カウントアップ</button>
+  <button v-on:click="show=!show">表示/非表示</button>
+  <span ref="count" v-if="show">0</span>
 
 
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>

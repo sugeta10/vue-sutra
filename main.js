@@ -20,7 +20,7 @@ var app = new Vue ({
         } else {
         app.show = true;
         }
-    }
+    },
   },
   // 算出プロパティ dataと似たように扱うことのできるデータ
   computed: {
@@ -48,6 +48,7 @@ var app2 = new Vue ({
       bgColor: 'lightgray',
       radius: 50,
       okay: false,
+      show: true,
       type: 'A',
       item: {
         id: 1,
@@ -104,6 +105,12 @@ var app2 = new Vue ({
         this.monsters = this.monsters.filter(function(el) {
           return el.hp <= 499
         })
+      },
+      countUp() {
+        var count = this.$refs.count
+        if (count) {
+          count.innerText = parseInt(count.innerText, 10) + 1
+        }
       }
     },
     created: function(){
@@ -117,8 +124,10 @@ var app2 = new Vue ({
         this.$set(mon, 'active', false)
       }, this)
     },
-    // 要素のスクロール量の操作のところはよくわかってない・・・
     mounted: function(){
-      this.scroll = 100 //要素のスクロール量
+      // this.scroll = 100 //要素のスクロール量のようだがよくわかってない
+      console.log(this.$el)
+      console.log(this.$refs.hello) //undefinedになるのでなにか問題がある
+      console.log(this.$refs.count) //undefinedになるのでなにか問題がある
     },
 })
