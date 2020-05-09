@@ -29,7 +29,9 @@
       <p v-if="show_t">Hello</p>
     </transition>
   </div>
+
   <hr>
+
   <div id="app2">
     <h1>データの更新</h1>
     <h2>v-bind 修飾子の活用</h2>
@@ -57,6 +59,72 @@
     </svg>
     <p>{{radius}}</p>
     <input type="range" min="0" max="100" v-model.number="radius">
+    <h2>テンプレート上での条件分岐</h2>
+    <p>v-if ではコメントアウトになる</p>
+    <div v-if="okay">v-if 条件による描画</div>
+    <p>v-show ではdisplay:none になるので、切り替えの頻度が多いものはこちらを使う</p>
+    <div v-show="okay">v-show 条件による表示</div>
+    <h2>template タグによるv-if グルーブ化</h2>
+    <p>template タグを使って複数の要素をグループ化</p>
+    <template v-if="okay">
+      <header>タイトル</header>
+      <div>コンテンツ</div>
+    </template>
+    <h2>v-else-if, v-elseによるグループ化</h2>
+    <div v-if="type === 'A'">
+      type は A
+    </div>
+    <div v-else-if="type === 'B'">
+      type は B
+    </div>
+    <div v-else>
+      すべての条件を満たさなかった場合
+    </div>
+    <h2>リストデータの表示と更新</h2>
+    <ul>
+      <li v-for="mon in monsters" v-bind:key="mon.id">
+        ID.{{mon.id}} {{mon.name}} HP.{{mon.hp}}
+        <span v-if="mon.hp > 300">つよい！</span>
+      </li>
+    </ul>
+    <h2>描画と表示の条件</h2>
+    <p>v-ifを追加して弱いモンスターだけ表示</p>
+    <ul>
+      <li v-for="mon in monsters" v-bind:key="mon.id" v-if="mon.hp < 300">
+        ID.{{mon.id}} {{mon.name}} HP.{{mon.hp}}
+      </li>
+    </ul>
+    <h2>リストの追加と削除</h2>
+    <input v-model="monsterName">
+    <button v-on:click="doAdd">モンスターを追加</button>
+    <ul>
+      <li v-for="(mon, index) in monsters" v-bind:key="mon.id">
+        ID.{{mon.id}} {{mon.name}} HP.{{mon.hp}}
+        <button v-on:click="doRemove(index)">モンスターを削除</button>
+      </li>
+    </ul>
+    <h2>リストの要素の置き換え</h2>
+    <p>this.$set(this.monsters, 0, {id:1, name: 'キングスライム', hp:500})</p>
+    <button v-on:click="changeSlime">スライムをキングスライムに変換</button>
+    <h2>プロパティの追加</h2>
+    <p>最初持っていないプロパティを追加</p>
+    <pre>created: function(){
+      this.monsters.forEach(function(mon){
+        this.$set(mon, 'active', false)
+      }, this)
+    },</pre>
+    <h2>リスト要素プロパティを更新</h2>
+    <ul>
+      <li v-for="(mon, index) in monsters" v-bind:key="mon.id" v-if="mon.hp">
+        ID.{{ mon.id }} {{ mon.name }} HP.{{ mon.hp }}
+        <span v-if="mon.hp < 50">瀕死！</span>
+        <!-- ボタンはv-for内に作成 -->
+        <button v-on:click="doAttack(index)">攻撃する</button>
+      </li>
+    </ul>
+  <h2>リスト自体の置き換え</h2>
+  <p>HPが500以上のつよいMonsterのデータを消す</p>
+  <button v-on:click="changeMonster()">実行</button>
   </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>

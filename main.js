@@ -47,6 +47,8 @@ var app2 = new Vue ({
       textColor: 'red',
       bgColor: 'lightgray',
       radius: 50,
+      okay: false,
+      type: 'A',
       item: {
         id: 1,
         src: 'item.jpeg',
@@ -61,12 +63,52 @@ var app2 = new Vue ({
       styleObject: {
         color: 'red',
         backgroundColor: 'lightgray',
-      }
+      },
+      monsterName: 'キマイラ',
+      monsters: [
+        {id: 1, name: 'スライム', hp: 100},
+        {id: 2, name: 'ゴブリン', hp: 200},
+        {id: 3, name: 'ドラゴン', hp: 500}
+      ]
     },
     methods: {
       increment: function(){
         this.count += 1
+      },
+      // 追加ボタンをクリックしたときのハンドラ
+      doAdd: function () {
+        // リスト内で1番大きいIDを取得
+        var max = this.monsters.reduce(function (a, b) {
+          return a > b.id ? a : b.id
+        }, 0)
+        // 新しいモンスターをリストに追加
+        this.monsters.push({
+          id: max + 1, // 現在の最大のIDに+1してユニークなIDを作成
+          name: this.monsterName, // 現在のフォームの入力値
+          hp: 500
+        })
+      },
+      // 要素を削除ボタンをクリックしたときのハンドラ
+      doRemove: function (index) {
+        // 受け取ったインデックスの位置から1個要素を削除
+        this.monsters.splice(index, 1)
+      },
+      doAttack: function (index) {
+        this.monsters[index].hp -= 10 // HPを減らす
+      },
+      changeSlime: function () {
+        this.$set(this.monsters, 0, {id:1, name: 'キングスライム', hp:500})
+      },
+      changeMonster: function () {
+        this.monsters = this.monsters.filter(function(el) {
+          return el.hp <= 499
+        })
       }
+    },
+    created: function(){
+      this.monsters.forEach(function(mon){
+        this.$set(mon, 'active', false)
+      }, this)
     },
     // 要素のスクロール量の操作のところはよくわかってない・・・
     mounted: function(){
