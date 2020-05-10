@@ -1,3 +1,4 @@
+Vue.config.devtools = true;
 var app = new Vue ({
   // Applicationを紐付ける要素のセレクタ/mountする要素
   el:'#app',
@@ -111,6 +112,14 @@ var app2 = new Vue ({
         if (count) {
           count.innerText = parseInt(count.innerText, 10) + 1
         }
+      },
+      fetchList(){
+        axios.get('list.json').then(function (response) {
+          // 取得完了したらlistリストに代入
+          this.list = response.data
+        }.bind(this)).catch(function (e) {
+          console.error(e)
+        })
       }
     },
     created: function(){
@@ -126,8 +135,8 @@ var app2 = new Vue ({
     },
     mounted: function(){
       // this.scroll = 100 //要素のスクロール量のようだがよくわかってない
-      console.log(this.$el)
-      console.log(this.$refs.hello) //undefinedになるのでなにか問題がある
-      console.log(this.$refs.count) //undefinedになるのでなにか問題がある
+      //console.log(this.$el)
+      //console.log(this.$refs.hello) //undefinedになるのでなにか問題がある
+      //console.log(this.$refs.count) //undefinedになるのでなにか問題がある
     },
 })
