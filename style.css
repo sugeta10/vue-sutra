@@ -18,3 +18,26 @@
 pre {
   background-color: azure;
 }
+
+/*
+v-cloak の基本的な使い方
+[v-cloak] {display: none;}
+*/
+
+@keyframes cloak-in {
+  0% {
+    opacity: 0;
+  }
+}
+#app {
+  animation: cloak-in 1s;
+}
+#app[v-cloak] {
+  opacity: 0;
+}
+#app2 {
+  animation: cloak-in 1s;
+}
+#app2[v-cloak] {
+  opacity: 0;
+}

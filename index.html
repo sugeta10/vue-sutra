@@ -7,7 +7,7 @@
 </head>
 <body>
 
-  <div id="app">
+  <div id="app" v-cloak>
     <h1>Vueチュートリアル</h1>
     <p>{{message}}</p>
     <h2>v-for でlist内の文字列を繰り返し表示</h2>
@@ -32,7 +32,7 @@
 
   <hr>
 
-  <div id="app2">
+  <div id="app2" v-cloak>
     <h1>データの更新</h1>
     <h2>v-bind 修飾子の活用</h2>
     <!-- DOMのtextContentプロパティにバインドする -->
@@ -125,14 +125,15 @@
   <h2>リスト自体の置き換え</h2>
   <p>HPが500以上のつよいMonsterのデータを消す</p>
   <button v-on:click="changeMonster()">実行</button>
-  </div>
-  <h2>外部からデータを取得</h2>
+  <h2>[WIP] 外部からデータを取得</h2>
+  <p>※代入したデータが配列ではなく文字列になってしまうので要修正</p>
   <button v-on:click="fetchList()">fetchList</button>
   <ul>
     <li v-for="(item, index) in list" v-bind:key="item.id">
       ID.{{ item.id }} {{ item.name }} HP.{{ item.hp }}
     </li>
   </ul>
+  {{message}}
   <h2>[WIP] DOMを直接参照する $el,$refs</h2>
   <p>$el 以下のようにすることでルート要素を確認できる
   <pre>// div id app2... /div をコンソールに出力
@@ -145,11 +146,31 @@
   mounted: function() {
     console.log(this.$refs.hello)
   }</pre>
-  <h2>[WIP] DOM操作サンプル</h2>
+  <h2>DOM操作サンプル</h2>
   <button v-on:click="countUp">カウントアップ</button>
   <button v-on:click="show=!show">表示/非表示</button>
   <span ref="count" v-if="show">0</span>
-  <div>
+  <h2>テンプレート制御ディレクティブ</h2>
+  <h2>v-pre</h2>
+  <p>子コンポーネントを含む内側のコンパイルをスキップして静的コンテンツとして扱う</p>
+  <a v-bind:href="url" v-pre>
+    {{message}}
+  </a>
+  <h2>v-once</h2>
+  <p>初回だけテンプレートを評価してそれ以降は静的コンテンツとして扱う</p>
+  <a v-bind:href="url" v-once>
+    {{message}}
+  </a>
+  <h2>v-text</h2>
+  <p>要素内のテキストコンテンツが単一のMustacheのときにシンプルに記述</p>
+  <span v-text="message"></span>
+  <h2>v-html</h2>
+  <p>HTMLタグをそのまま表示させたい場合に使う</p>
+  <span v-html="message2"></span>
+  <h2>v-cloak</h2>
+  <p>インスタンス作成までの間にMustacheなどを表示しないために使用</p>
+</div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios@0.17.1/dist/axios.min.js"></script>

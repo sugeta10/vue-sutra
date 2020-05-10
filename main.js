@@ -72,7 +72,9 @@ var app2 = new Vue ({
         {id: 1, name: 'スライム', hp: 100},
         {id: 2, name: 'ゴブリン', hp: 200},
         {id: 3, name: 'ドラゴン', hp: 500}
-      ]
+      ],
+      url: 'https://sugeta10.github.io/vue-sutra/',
+      message2: 'Hello <strong>Vue.js!</strong>',
     },
     methods: {
       increment: function(){
@@ -123,6 +125,7 @@ var app2 = new Vue ({
       }
     },
     created: function(){
+      // 代入したデータが文字列になるので要修正
       axios.get('list.json').then(function (response) {
         // 取得完了したらlistリストに代入
         this.list = response.data
